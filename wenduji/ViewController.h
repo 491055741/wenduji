@@ -7,7 +7,5 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ThermometerView.h"
 @interface ViewController : UIViewController
-@property(nonatomic)ThermometerView * thermometerView;
 @end
