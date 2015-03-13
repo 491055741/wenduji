@@ -68,7 +68,7 @@
 - (IBAction)switchDayNight
 {
     _isNightMode = !_isNightMode;
-    self.view.backgroundColor = _isNightMode ? [UIColor colorWithPatternImage:[UIImage imageNamed:@"star_background"]] : [UIColor whiteColor];
+    self.view.backgroundColor = _isNightMode ? [UIColor colorWithPatternImage:[UIImage imageNamed:@"blue_background"]] : [UIColor whiteColor];
 }
 
 @end
