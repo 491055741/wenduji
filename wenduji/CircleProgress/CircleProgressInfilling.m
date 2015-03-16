@@ -89,15 +89,32 @@
     [_layer_d setMask:_shapelayer];
     [self.layer addSublayer:_layer_d];
 
+    [self drawLastValue:rect];
     [self drawShadow];
+}
+
+- (void)drawLastValue:(CGRect)rect
+{
+    _z2 = MAX(_z1, _z2);
+    double alpha = _z2*(2*M_PI - M_PI/2) - M_PI/4;
+    float x = _centerPoint.x - (_radius - 20) * cos(alpha);
+    float y = _centerPoint.y - (_radius - 20) * sin(alpha);
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    UIGraphicsPushContext(context);
+    CGContextSetRGBFillColor(context, 255.0/255, 0.0/255, 0.0/255, 1.0);
+    CGContextFillEllipseInRect(context, CGRectMake(x-5, y-5, 10, 10));
+    UIGraphicsPopContext();
+
 }
 
 - (void)drawShadow
 {
-    self.layer.shadowOffset = CGSizeMake(5, 5); //设置阴影的偏移量
-    self.layer.shadowRadius = 5.0;  //设置阴影的半径
+    self.layer.shadowOffset = CGSizeMake(3, 3); //设置阴影的偏移量
+    self.layer.shadowRadius = 3.0;  //设置阴影的半径
     self.layer.shadowColor = [UIColor blackColor].CGColor; //设置阴影的颜色为黑色
-    self.layer.shadowOpacity = 1; //透明度
+    self.layer.shadowOpacity = 0.7; //透明度
 }
 
 - (void)setWidth:(float)width

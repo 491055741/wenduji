@@ -8,6 +8,7 @@
 
 #import "ChartTableViewCell.h"
 #import "Chart.h"
+#import "RecordsStore.h"
 
 @interface ChartTableViewCell ()<ChartDataSource>
 {
@@ -76,6 +77,15 @@
 //数值多重数组
 - (NSArray *)Chart_yValueArray:(Chart *)chart
 {
+
+    RecordsStore *recordsStore = [RecordsStore sharedInstance];
+//    NSArray *tempArray = recordsStore.recordsArray;
+    NSMutableArray *valueArray = [NSMutableArray arrayWithCapacity:10];
+    for (Record *record in recordsStore.recordsArray) {
+        [valueArray addObject:[NSString stringWithFormat:@"%f", record.temperature.floatValue]];
+    }
+    
+    
     NSArray *ary = @[@"22",@"44",@"15",@"40",@"42"];
     NSArray *ary1 = @[@"22",@"54",@"15",@"30",@"42",@"77",@"43"];
     NSArray *ary2 = @[@"76",@"34",@"54",@"23",@"16",@"32",@"17"];
@@ -85,7 +95,7 @@
     if (path.section==0) {
         switch (path.row) {
             case 0:
-                return @[ary];
+                return @[valueArray];
             case 1:
                 return @[ary4];
             case 2:
@@ -111,16 +121,7 @@
 //显示数值范围
 - (CGRange)ChartChooseRangeInLineChart:(Chart *)chart
 {
-    if (path.section==0 && (path.row==0|path.row==1)) {
-        return CGRangeMake(60, 10);
-    }
-    if (path.section==1 && path.row==0) {
-        return CGRangeMake(60, 10);
-    }
-    if (path.row==2) {
-        return CGRangeMake(100, 0);
-    }
-    return CGRangeZero;
+    return CGRangeMake(40, 36);
 }
 
 #pragma mark 折线图专享功能

@@ -43,15 +43,15 @@
     _font1 = [UIFont fontWithName:@"DBLCDTempBlack" size:rect.size.height/2];
     _label.font = _font1;
     if (_value < 37) {
-        _label.textColor = [UIColor greenColor];
+        _label.textColor = [UIColor colorWithRed:25.f/255.f green:180.f/255 blue:25.f/255.f alpha:1];
     } else if (_value < 40) {
-        _label.textColor = [UIColor yellowColor];
+        _label.textColor = [UIColor orangeColor];
     } else {
         _label.textColor = [UIColor redColor];
     }
     _label.text = [NSString stringWithFormat:@"%.2f",_value];
     
-    _label2.frame = CGRectMake(4*rect.size.width/5, 0, rect.size.width/5, rect.size.height/3);
+    _label2.frame = CGRectMake(rect.size.width*5/6, rect.size.height/3, rect.size.width/5, rect.size.height/2);
     _font2 = [UIFont fontWithName:@"DBLCDTempBlack" size:rect.size.height/4];
     _label2.font = _font2;
     _label2.text = @"℃";

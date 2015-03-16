@@ -34,6 +34,11 @@
 		E8B4B6981AADE63300A22CE9 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8B4B6971AADE63300A22CE9 /* Storyboard.storyboard */; };
 		E8E535781AA9A7A700C33759 /* CircleProgressBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E535751AA9A7A700C33759 /* CircleProgressBackground.m */; };
 		E8E535791AA9A7A700C33759 /* CircleProgressInfilling.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E535771AA9A7A700C33759 /* CircleProgressInfilling.m */; };
+		E8E864101AB33386005E47DC /* BLEDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E8640D1AB33386005E47DC /* BLEDiscovery.m */; };
+		E8E864111AB33386005E47DC /* BLEService.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E8640F1AB33386005E47DC /* BLEService.m */; };
+		E8E864131AB3392E005E47DC /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E864121AB3392E005E47DC /* CoreBluetooth.framework */; };
+		E8E864161AB3E3C8005E47DC /* RecordsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E864151AB3E3C8005E47DC /* RecordsStore.m */; };
+		E8E864191AB406BC005E47DC /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E864181AB406BC005E47DC /* Record.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +96,15 @@
 		E8E535751AA9A7A700C33759 /* CircleProgressBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleProgressBackground.m; sourceTree = "<group>"; };
 		E8E535761AA9A7A700C33759 /* CircleProgressInfilling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressInfilling.h; sourceTree = "<group>"; };
 		E8E535771AA9A7A700C33759 /* CircleProgressInfilling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleProgressInfilling.m; sourceTree = "<group>"; };
+		E8E8640C1AB33386005E47DC /* BLEDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDiscovery.h; sourceTree = "<group>"; };
+		E8E8640D1AB33386005E47DC /* BLEDiscovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEDiscovery.m; sourceTree = "<group>"; };
+		E8E8640E1AB33386005E47DC /* BLEService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEService.h; sourceTree = "<group>"; };
+		E8E8640F1AB33386005E47DC /* BLEService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEService.m; sourceTree = "<group>"; };
+		E8E864121AB3392E005E47DC /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		E8E864141AB3E3C8005E47DC /* RecordsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordsStore.h; sourceTree = "<group>"; };
+		E8E864151AB3E3C8005E47DC /* RecordsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordsStore.m; sourceTree = "<group>"; };
+		E8E864171AB406BC005E47DC /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
+		E8E864181AB406BC005E47DC /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8E864131AB3392E005E47DC /* CoreBluetooth.framework in Frameworks */,
 				DA42B6F7197CAA33001F1E4B /* CoreGraphics.framework in Frameworks */,
 				DA42B6F9197CAA33001F1E4B /* UIKit.framework in Frameworks */,
 				DA42B6F5197CAA33001F1E4B /* Foundation.framework in Frameworks */,
@@ -139,6 +154,7 @@
 		DA42B6F3197CAA33001F1E4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E8E864121AB3392E005E47DC /* CoreBluetooth.framework */,
 				DA42B6F4197CAA33001F1E4B /* Foundation.framework */,
 				DA42B6F6197CAA33001F1E4B /* CoreGraphics.framework */,
 				DA42B6F8197CAA33001F1E4B /* UIKit.framework */,
@@ -150,22 +166,27 @@
 		DA42B6FA197CAA33001F1E4B /* wenduji */ = {
 			isa = PBXGroup;
 			children = (
+				E8E535731AA9A7A600C33759 /* CircleProgress */,
+				E8B4B67A1AADDCCB00A22CE9 /* Chart */,
+				E8E8640B1AB33386005E47DC /* BLE */,
+				E8E864141AB3E3C8005E47DC /* RecordsStore.h */,
+				E8E864151AB3E3C8005E47DC /* RecordsStore.m */,
+				E8E864171AB406BC005E47DC /* Record.h */,
+				E8E864181AB406BC005E47DC /* Record.m */,
 				E8B4B68D1AADE0BB00A22CE9 /* ChartTableViewCell.h */,
 				E8B4B68E1AADE0BB00A22CE9 /* ChartTableViewCell.m */,
 				E8B4B68F1AADE0BB00A22CE9 /* ChartTableViewCell.xib */,
 				E8B4B6901AADE0BB00A22CE9 /* ChartViewController.h */,
 				E8B4B6911AADE0BB00A22CE9 /* ChartViewController.m */,
-				E8B4B67A1AADDCCB00A22CE9 /* Chart */,
-				E8E535731AA9A7A600C33759 /* CircleProgress */,
 				DA42B703197CAA33001F1E4B /* AppDelegate.h */,
 				DA42B704197CAA33001F1E4B /* AppDelegate.m */,
 				DA42B723197CAA45001F1E4B /* ViewController.h */,
 				DA42B724197CAA45001F1E4B /* ViewController.m */,
-				E8B4B6971AADE63300A22CE9 /* Storyboard.storyboard */,
 				DA42B726197CABCA001F1E4B /* ThermometerView.h */,
 				DA42B727197CABCA001F1E4B /* ThermometerView.m */,
 				DA42B72F197CAC2E001F1E4B /* LedNumberView.h */,
 				DA42B730197CAC2E001F1E4B /* LedNumberView.m */,
+				E8B4B6971AADE63300A22CE9 /* Storyboard.storyboard */,
 				DA42B706197CAA33001F1E4B /* Images.xcassets */,
 				DA42B6FB197CAA33001F1E4B /* Supporting Files */,
 			);
@@ -229,6 +250,17 @@
 				E8E535771AA9A7A700C33759 /* CircleProgressInfilling.m */,
 			);
 			path = CircleProgress;
+			sourceTree = "<group>";
+		};
+		E8E8640B1AB33386005E47DC /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				E8E8640C1AB33386005E47DC /* BLEDiscovery.h */,
+				E8E8640D1AB33386005E47DC /* BLEDiscovery.m */,
+				E8E8640E1AB33386005E47DC /* BLEService.h */,
+				E8E8640F1AB33386005E47DC /* BLEService.m */,
+			);
+			path = BLE;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,6 +364,8 @@
 				E8B4B68C1AADDCCB00A22CE9 /* LineChart.m in Sources */,
 				E8B4B6891AADDCCB00A22CE9 /* Chart.m in Sources */,
 				DA42B731197CAC2E001F1E4B /* LedNumberView.m in Sources */,
+				E8E864111AB33386005E47DC /* BLEService.m in Sources */,
+				E8E864101AB33386005E47DC /* BLEDiscovery.m in Sources */,
 				DA42B725197CAA45001F1E4B /* ViewController.m in Sources */,
 				DA42B72C197CABCA001F1E4B /* ThermometerView.m in Sources */,
 				E8E535781AA9A7A700C33759 /* CircleProgressBackground.m in Sources */,
@@ -340,8 +374,10 @@
 				E8B4B6871AADDCCB00A22CE9 /* Bar.m in Sources */,
 				E8B4B6951AADE0BB00A22CE9 /* ChartViewController.m in Sources */,
 				DA42B701197CAA33001F1E4B /* main.m in Sources */,
+				E8E864191AB406BC005E47DC /* Record.m in Sources */,
 				E8B4B68B1AADDCCB00A22CE9 /* Color.m in Sources */,
 				E8E535791AA9A7A700C33759 /* CircleProgressInfilling.m in Sources */,
+				E8E864161AB3E3C8005E47DC /* RecordsStore.m in Sources */,
 				E8B4B68A1AADDCCB00A22CE9 /* ChartLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,7 @@
 #import "ThermometerView.h"
 #import "CircleProgressBackground.h"
 #import "CircleProgressInfilling.h"
+
 @implementation ThermometerView
 
 - (id)initWithFrame:(CGRect)frame
@@ -43,7 +44,6 @@
 {
     [self drawCircleProgress:rect];
     [self drawLedNumber:rect];
-    
 }
 
 - (void)drawLedNumber:(CGRect)rect
