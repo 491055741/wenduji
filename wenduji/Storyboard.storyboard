@@ -66,7 +66,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="cUa-zy-DQa" kind="push" id="P0g-5N-acf"/>
+                                    <segue destination="ebW-Oy-9Rb" kind="push" id="CbC-L4-wgu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -84,6 +84,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kOk-SP-aDN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-50" y="426"/>
+        </scene>
+        <!--History View Controller-->
+        <scene sceneID="1yB-Jw-cdn">
+            <objects>
+                <tableViewController id="ebW-Oy-9Rb" customClass="HistoryViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="bzC-yN-f6N">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jdC-yU-oT9">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jdC-yU-oT9" id="8XL-dx-BJY">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ebW-Oy-9Rb" id="vv4-eR-pEb"/>
+                            <outlet property="delegate" destination="ebW-Oy-9Rb" id="yhl-th-XXg"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="iAA-Eg-XzQ"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4T3-Fq-e9A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="496" y="419"/>
         </scene>
         <!--Chart View Controller-->
         <scene sceneID="fEk-9j-IPr">
@@ -113,7 +140,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nf1-bE-9nt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="435" y="627"/>
+            <point key="canvasLocation" x="823" y="738"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

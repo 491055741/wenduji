@@ -22,6 +22,7 @@
 		DA42B725197CAA45001F1E4B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA42B724197CAA45001F1E4B /* ViewController.m */; };
 		DA42B72C197CABCA001F1E4B /* ThermometerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA42B727197CABCA001F1E4B /* ThermometerView.m */; };
 		DA42B731197CAC2E001F1E4B /* LedNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA42B730197CAC2E001F1E4B /* LedNumberView.m */; };
+		E82599E61ABAFB3500AA71D0 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E82599E41ABAFB3500AA71D0 /* HistoryViewController.m */; };
 		E8B4B6871AADDCCB00A22CE9 /* Bar.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B4B67C1AADDCCB00A22CE9 /* Bar.m */; };
 		E8B4B6881AADDCCB00A22CE9 /* BarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B4B67E1AADDCCB00A22CE9 /* BarChart.m */; };
 		E8B4B6891AADDCCB00A22CE9 /* Chart.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B4B6801AADDCCB00A22CE9 /* Chart.m */; };
@@ -74,6 +75,8 @@
 		DA42B727197CABCA001F1E4B /* ThermometerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThermometerView.m; sourceTree = "<group>"; };
 		DA42B72F197CAC2E001F1E4B /* LedNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LedNumberView.h; sourceTree = "<group>"; };
 		DA42B730197CAC2E001F1E4B /* LedNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LedNumberView.m; sourceTree = "<group>"; };
+		E82599E31ABAFB3500AA71D0 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		E82599E41ABAFB3500AA71D0 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		E8B4B67B1AADDCCB00A22CE9 /* Bar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bar.h; sourceTree = "<group>"; };
 		E8B4B67C1AADDCCB00A22CE9 /* Bar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bar.m; sourceTree = "<group>"; };
 		E8B4B67D1AADDCCB00A22CE9 /* BarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarChart.h; sourceTree = "<group>"; };
@@ -182,6 +185,8 @@
 				DA42B704197CAA33001F1E4B /* AppDelegate.m */,
 				DA42B723197CAA45001F1E4B /* ViewController.h */,
 				DA42B724197CAA45001F1E4B /* ViewController.m */,
+				E82599E31ABAFB3500AA71D0 /* HistoryViewController.h */,
+				E82599E41ABAFB3500AA71D0 /* HistoryViewController.m */,
 				DA42B726197CABCA001F1E4B /* ThermometerView.h */,
 				DA42B727197CABCA001F1E4B /* ThermometerView.m */,
 				DA42B72F197CAC2E001F1E4B /* LedNumberView.h */,
@@ -363,6 +368,7 @@
 				E8B4B6931AADE0BB00A22CE9 /* ChartTableViewCell.m in Sources */,
 				E8B4B68C1AADDCCB00A22CE9 /* LineChart.m in Sources */,
 				E8B4B6891AADDCCB00A22CE9 /* Chart.m in Sources */,
+				E82599E61ABAFB3500AA71D0 /* HistoryViewController.m in Sources */,
 				DA42B731197CAC2E001F1E4B /* LedNumberView.m in Sources */,
 				E8E864111AB33386005E47DC /* BLEService.m in Sources */,
 				E8E864101AB33386005E47DC /* BLEDiscovery.m in Sources */,
