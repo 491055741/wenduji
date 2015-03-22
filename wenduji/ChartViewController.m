@@ -7,19 +7,37 @@
 //
 
 #import "ChartViewController.h"
-#import "ChartTableViewCell.h"
+#import "RecordsStore.h"
+#import "Chart.h"
+#import "Kal.h"
 
-@interface ChartViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface ChartViewController () <KalCalendarDelegate, ChartDataSource>
 
-@property (weak, nonatomic) IBOutlet UITableView *myTableView;
-
+@property (nonatomic, strong) KalViewController *kalCalendar;
+@property (nonatomic, strong) Chart *chartView;
 @end
 
 @implementation ChartViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _myTableView.tableFooterView = [[UIView alloc] init];
+
+    if (self.kalCalendar == nil)
+    {
+        self.kalCalendar = [[KalViewController alloc] initWithSelectedDate:[NSDate date]];
+        _kalCalendar.isSingleDate = YES;
+        _kalCalendar.calendarDelegate = self;
+        _kalCalendar.dataSource = nil;
+        _kalCalendar.view.frame = CGRectMake(0, self.view.frame.size.height - kCalendarHeight, 320, kCalendarHeight);
+        _kalCalendar.view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    }
+    [self.view addSubview:_kalCalendar.view];
+
+    self.chartView = [[Chart alloc]initwithChartDataFrame:CGRectMake(10, 10, [UIScreen mainScreen].bounds.size.width-20, 150)
+                                          withSource:self
+                                           withStyle:ChartLineStyle];
+    [_chartView showInView:self.view];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -27,54 +45,53 @@
     self.navigationController.navigationBar.hidden = NO;
 }
 
-#pragma mark - UITableView Datasource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return section?2:4;
-    return 1;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"TableViewCell";
-    
-    ChartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-
-    if(cell == nil) {
-        cell = [[[NSBundle mainBundle]loadNibNamed:@"ChartTableViewCell" owner:nil options:nil] firstObject];
-    }
-    [cell configUI:indexPath];
-    
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 170;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 30;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    CGRect frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width , 30);
-    UILabel *label = [[UILabel alloc]initWithFrame:frame];
-    label.font = [UIFont systemFontOfSize:30];
-    label.backgroundColor = [[UIColor lightGrayColor]colorWithAlphaComponent:0.3];
-    label.text = @"今日体温记录";
-    label.textColor = [UIColor colorWithRed:0.257 green:0.650 blue:0.478 alpha:1.000];
-    label.textAlignment = NSTextAlignmentCenter;
-    return label;
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - KalCalendar delegate method
+- (void)didSelectDate:(NSDate *)date
+{
+    NSLog(@"%s %@", __func__, date);
+}
 
+#pragma mark - @required
+//横坐标标题数组
+- (NSArray *)Chart_xLableArray:(Chart *)chart
+{
+    NSInteger num = 5;
+    NSMutableArray *xTitles = [NSMutableArray array];
+    for (int i = 0; i < num; i++) {
+        NSString *str = [NSString stringWithFormat:@"R-%d", i];
+        [xTitles addObject:str];
+    }
+    return xTitles;
+}
+
+//数值多重数组
+- (NSArray *)Chart_yValueArray:(Chart *)chart
+{
+    RecordsStore *recordsStore = [RecordsStore sharedInstance];
+    //    NSArray *tempArray = recordsStore.recordsArray;
+    NSMutableArray *valueArray = [NSMutableArray arrayWithCapacity:10];
+    for (Record *record in recordsStore.recordsArray) {
+        [valueArray addObject:[NSString stringWithFormat:@"%f", record.temperature.floatValue]];
+    }
+    
+    return @[valueArray];
+}
+
+#pragma mark - @optional
+//颜色数组
+- (NSArray *)Chart_ColorArray:(Chart *)chart
+{
+    return @[UUGreen,UURed,UUBrown];
+}
+//显示数值范围
+- (CGRange)ChartChooseRangeInLineChart:(Chart *)chart
+{
+    return CGRangeMake(40, 36);
+}
 
 @end
