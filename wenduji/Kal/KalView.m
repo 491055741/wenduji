@@ -14,7 +14,8 @@
 - (void)setHeaderTitleText:(NSString *)text;
 @end
 
-static const CGFloat kHeaderHeight = 44.f + 33.f;
+static const CGFloat kMonthHeight = 33.f;//44.f
+static const CGFloat kHeaderHeight = kMonthHeight + 33.f;
 static const CGFloat kMonthLabelHeight = 17.f;
 
 @implementation KalView
@@ -38,13 +39,12 @@ static const CGFloat kMonthLabelHeight = 17.f;
     [self addSubview:headerView];  
     
     UIView *contentView = [[[UIView alloc] initWithFrame:CGRectMake(0.f, kHeaderHeight, frame.size.width, frame.size.height - kHeaderHeight)] autorelease];
-      
+
     contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self addSubviewsToContentView:contentView];
     [self addSubview:contentView];
-    
   }
-  
+
   return self;
 }
 
@@ -102,16 +102,16 @@ static const CGFloat kMonthLabelHeight = 17.f;
 - (void)addSubviewsToHeaderView:(UIView *)headerView
 {
   const CGFloat kChangeMonthButtonWidth = 46.0f;
-  const CGFloat kChangeMonthButtonHeight = 30.0f;
+  const CGFloat kChangeMonthButtonHeight = kMonthHeight - 10.f;//30.0f;
   const CGFloat kMonthLabelWidth = 200.0f;
   const CGFloat kHeaderVerticalAdjust = 10.f;//3.f;
   
-  UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 44.f, headerView.frame.size.width, 33.f)];
+  UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, kMonthHeight + 5.f, headerView.frame.size.width, 33.f - 5.f)];
   backgroundView.backgroundColor = RGB(238, 238, 243);
   [headerView addSubview:backgroundView];
   headerView.backgroundColor = [UIColor whiteColor];
   [backgroundView release];
-    
+
   // Create the previous month button on the left side of the view
   CGRect previousMonthButtonFrame = CGRectMake(self.left,
                                                kHeaderVerticalAdjust,
@@ -124,7 +124,7 @@ static const CGFloat kMonthLabelHeight = 17.f;
   [previousMonthButton addTarget:self action:@selector(showPreviousMonth) forControlEvents:UIControlEventTouchUpInside];
   [headerView addSubview:previousMonthButton];
   [previousMonthButton release];
-  
+
   // Draw the selected month name centered and at the top of the view
   CGRect monthLabelFrame = CGRectMake((self.width/2.0f) - (kMonthLabelWidth/2.0f),
                                       kHeaderVerticalAdjust + 2.f,
@@ -133,7 +133,7 @@ static const CGFloat kMonthLabelHeight = 17.f;
   headerTitleLabel = [[UILabel alloc] initWithFrame:monthLabelFrame];
   headerTitleLabel.backgroundColor = [UIColor clearColor];
 //  headerTitleLabel.font = [UIFont boldSystemFontOfSize:22.f];
-  headerTitleLabel.font = [UIFont systemFontOfSize:18.f];
+  headerTitleLabel.font = [UIFont systemFontOfSize:15.f];// 18.f
   headerTitleLabel.textAlignment = NSTextAlignmentCenter;
   headerTitleLabel.textColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"kal_header_text_fill.png"]];
 //  headerTitleLabel.shadowColor = [UIColor whiteColor];
@@ -162,7 +162,7 @@ static const CGFloat kMonthLabelHeight = 17.f;
   NSUInteger firstWeekday = [[NSCalendar currentCalendar] firstWeekday];
   NSUInteger i = firstWeekday - 1;
   for (CGFloat xOffset = 0.f; xOffset < headerView.width; xOffset += 46.f, i = (i+1)%7) {
-    CGRect weekdayFrame = CGRectMake(xOffset, 38.f, 46.f, kHeaderHeight - 29.f);
+    CGRect weekdayFrame = CGRectMake(xOffset, 32.f, 46.f, kHeaderHeight - 29.f);
     UILabel *weekdayLabel = [[UILabel alloc] initWithFrame:weekdayFrame];
     weekdayLabel.backgroundColor = [UIColor clearColor];
 //    weekdayLabel.font = [UIFont boldSystemFontOfSize:10.f];

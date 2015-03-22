@@ -23,7 +23,8 @@
 
 #define kHintViewTag 111
 
-const CGSize kTileSize = { 46.f, 38.f };
+//const CGSize kTileSize = { 46.f, 38.f };
+const CGSize kTileSize = { 46.f, 30.f };
 
 static NSString *kSlideAnimationId = @"KalSwitchMonths";
 

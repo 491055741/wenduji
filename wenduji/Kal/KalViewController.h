@@ -7,7 +7,7 @@
 #import "KalDataSource.h" // for the KalDataSourceCallbacks protocol
 
 #define kCalendarWidth 320
-#define kCalendarHeight 310
+#define kCalendarHeight 250//310
 
 @protocol KalCalendarDelegate <NSObject>
 
