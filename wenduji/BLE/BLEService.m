@@ -124,12 +124,11 @@ NSString *kServiceEnteredForegroundNotification = @"kServiceEnteredForegroundNot
         } else if ([[characteristic UUID] isEqual:_batteryLevelUUID]) { // battery level
             NSLog(@"Discovered Battery Level Characteristic");
             _batteryLevelCharacteristic = characteristic;
-            //			[peripheral readValueForCharacteristic:characteristic];
+            [peripheral readValueForCharacteristic:characteristic];
             [peripheral setNotifyValue:YES forCharacteristic:characteristic];
         }
     }
 }
-
 
 #pragma mark -
 #pragma mark Characteristics interaction
@@ -179,7 +178,7 @@ NSString *kServiceEnteredForegroundNotification = @"kServiceEnteredForegroundNot
 {
     /* Temperature change */
     if ([[characteristic UUID] isEqual:_batteryLevelCharacteristic]) {
-        //        NSLog(@"%s Character[%@] nofify value:[%@]", __FUNCTION__, [characteristic UUID], [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding] );
+                NSLog(@"%s Character[%@] nofify value:[%@]", __FUNCTION__, [characteristic UUID], [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding] );
         [self.peripheralDelegate ThermometerDidChangeBatteryLevel:self.batteryLevel];
         return;
     }
@@ -190,7 +189,6 @@ NSString *kServiceEnteredForegroundNotification = @"kServiceEnteredForegroundNot
         [self.peripheralDelegate ThermometerDidChangeTemperature:self.temperature];
         return;
     }
-
 }
 
 - (void) peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error

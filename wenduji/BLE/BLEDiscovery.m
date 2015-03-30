@@ -260,23 +260,16 @@
 - (void) centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
     /* Create a service instance. */
-	BLEService *service1 = [[NSClassFromString(@"TemperatureService") alloc] initWithPeripheral:peripheral controller:peripheralDelegate];
-	[service1 start];
+	BLEService *service = [[BLEService alloc ]initWithPeripheral:peripheral controller:peripheralDelegate];
+	[service start];
 
-	if (![connectedServices containsObject:service1])
-		[connectedServices addObject:service1];
+	if (![connectedServices containsObject:service])
+		[connectedServices addObject:service];
 
-//    BLEService *service2 = [[NSClassFromString(@"BatteryService") alloc] initWithPeripheral:peripheral controller:peripheralDelegate];
-//    [service2 start];
-
-//    if (![connectedServices containsObject:service2])
-//        [connectedServices addObject:service2];
-    
 	if ([foundPeripherals containsObject:peripheral])
 		[foundPeripherals removeObject:peripheral];
 
-    [peripheralDelegate ThermometerDidChangeStatus:service1];
-//    [peripheralDelegate ThermometerDidChangeStatus:service2];
+    [peripheralDelegate ThermometerDidChangeStatus:service];
     [discoveryDelegate discoveryDidRefresh];
 }
 
