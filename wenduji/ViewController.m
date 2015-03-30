@@ -16,12 +16,15 @@
 #define DAY_TIME_COLOR [UIColor blackColor]
 #define NIGHT_TIME_COLOR RGB(243,241,239)
 
-@interface ViewController () <BLEDiscoveryDelegate, BLEAlarmProtocol>
+@interface ViewController () <BLEDiscoveryDelegate, ThermometerProtocol>
 @property (nonatomic, assign) BOOL isNightMode;
+@property (nonatomic, assign) BOOL isManualSetDayNight;
 @property (nonatomic, weak) IBOutlet UIStepper *stepper;
 @property (nonatomic, weak) IBOutlet ThermometerView *thermometerView;
 @property (nonatomic, weak) IBOutlet UILabel *timeLabel;
+@property (nonatomic, weak) IBOutlet UIButton *dayNightButton;
 @property (nonatomic, strong) NSTimer *timer;
+
 @end
 
 @implementation ViewController
@@ -31,6 +34,7 @@
 {
     [super viewDidLoad];
 
+    _stepper.hidden = YES;
     _stepper.minimumValue = _thermometerView.minValue = 35.0f;
     _stepper.maximumValue = _thermometerView.maxValue = 42.0f;
     _thermometerView.width = 15;
@@ -58,7 +62,7 @@
     [formatter setDateFormat:@"HH:mm"];
     NSString *str = [formatter stringFromDate:[NSDate date]];
     _timeLabel.text = str;
-    if (_isNightMode != [self currentTimeIsNight]) {
+    if (!_isManualSetDayNight && _isNightMode != [self currentTimeIsNight]) {
         [self switchDayNight];
     }
 }
@@ -85,12 +89,20 @@
     _thermometerView.value = stepper.value;
 }
 
-- (IBAction)switchDayNight
+- (IBAction)dayNightBtnClicked
+{
+    _isManualSetDayNight = YES;
+    [self switchDayNight];
+}
+
+- (void)switchDayNight
 {
     _isNightMode = !_isNightMode;
-    
+
     self.view.backgroundColor = _isNightMode ? NIGHT_BG_COLOR : DAY_BG_COLOR;
-    self.timeLabel.textColor = _isNightMode ? NIGHT_TIME_COLOR : DAY_TIME_COLOR;
+    _timeLabel.textColor = _isNightMode ? NIGHT_TIME_COLOR : DAY_TIME_COLOR;
+    _dayNightButton.selected = _isNightMode;
+    [[UIApplication sharedApplication] setStatusBarStyle:_isNightMode ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault];
 }
 
 #pragma mark -
@@ -114,66 +126,9 @@
 
 #pragma mark -
 #pragma mark LeAntiLostAlarmProtocol Delegate Methods
-/****************************************************************************/
-/*				LeAntiLostAlarmProtocol Delegate Methods					*/
-/****************************************************************************/
-/** Broke the high or low temperature bound */
-- (void)alarmService:(BLEService*)service didSoundAlarmOfType:(AlarmType)alarm
-{
-    NSString *title;
-    NSString *message;
-    
-    switch (alarm) {
-        case kAlarmLow:
-            NSLog(@"Alarm low");
-            title     = @"Alarm Notification";
-            message   = @"Low Alarm Fired";
-            break;
-            
-        case kAlarmHigh:
-            NSLog(@"Alarm high");
-            title     = @"Alarm Notification";
-            message   = @"High Alarm Fired";
-            break;
-    }
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
-}
-
-/** Back into normal values */
-- (void)alarmServiceDidStopAlarm:(BLEService *)service
-{
-    NSLog(@"Alarm stopped");
-}
-
-/** Current temp changed */
-//- (void) alarmServiceDidChangeTemperature:(LeAntiLostService*)service
-//{
-//    if (service != currentlyDisplayingService)
-//        return;
-//
-//    NSInteger currentTemperature = (int)[service temperature];
-//    [currentTemperatureLabel setText:[NSString stringWithFormat:@"%dº", currentTemperature]];
-//}
-
-
-/** Max or Min change request complete */
-//- (void) alarmServiceDidChangeTemperatureBounds:(LeAntiLostService*)service
-//{
-//    if (service != currentlyDisplayingService)
-//        return;
-//
-//    [maxAlarmLabel setText:[NSString stringWithFormat:@"MAX %dº", (int)[currentlyDisplayingService maximumTemperature]]];
-//    [minAlarmLabel setText:[NSString stringWithFormat:@"MIN %dº", (int)[currentlyDisplayingService minimumTemperature]]];
-//
-//    [maxAlarmStepper setEnabled:YES];
-//    [minAlarmStepper setEnabled:YES];
-//}
-//
 
 /** Peripheral connected or disconnected */
-- (void) alarmServiceDidChangeStatus:(BLEService*)service
+- (void) ThermometerDidChangeStatus:(BLEService*)service
 {
     if ( [service peripheral].state == CBPeripheralStateConnected ) {
         NSLog(@"%s Device (%@) connected", __func__, service.peripheral.name);
@@ -186,13 +141,26 @@
     }
 }
 
-- (void)alarmService:(BLEService*)service didUpdateRSSI:(NSNumber *)RSSI
+- (void)ThermometerDidChangeTemperature:(CGFloat)temperature
 {
-//    _distanceLabel.text = [NSString stringWithFormat:@"%d", [RSSI intValue]];
+    if (_thermometerView.value < 40 && temperature >= 40) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"高温警告" message:@"体温过高！建议您立刻联系医生或去医院检查！" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        }]];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+    }
+
+    _thermometerView.value = temperature;
+}
+
+- (void) ThermometerDidChangeBatteryLevel:(NSInteger)batteryLevel
+{
+    NSLog(@"%s battery level:%ld", __FUNCTION__, (long)batteryLevel);
 }
 
 /** Central Manager reset */
-- (void)alarmServiceDidReset
+- (void)ThermometerDidReset
 {
     NSLog(@"%s", __func__);
     //    [connectedServices removeAllObjects];

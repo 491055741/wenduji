@@ -27,7 +27,7 @@
             <objects>
                 <viewController id="F88-36-gJV" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CQH-TH-P96">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="MWQ-xF-ZQo" customClass="ThermometerView">
@@ -36,7 +36,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" id="shl-HZ-eF5">
-                                <rect key="frame" x="16" y="455" width="94" height="29"/>
+                                <rect key="frame" x="16" y="519" width="94" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="changeValue:" destination="F88-36-gJV" eventType="valueChanged" id="Gwg-Fy-Q7Z"/>
@@ -49,18 +49,8 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="N2g-Zn-P0C">
-                                <rect key="frame" x="195" y="72" width="90" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Day/Night">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="switchDayNight" destination="F88-36-gJV" eventType="touchUpInside" id="075-fz-FTJ"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qAh-fy-1zd">
-                                <rect key="frame" x="214" y="455" width="91" height="30"/>
+                                <rect key="frame" x="214" y="519" width="91" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="History">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -69,13 +59,26 @@
                                     <segue destination="cUa-zy-DQa" kind="push" id="bbC-oh-Wfy"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N2g-Zn-P0C">
+                                <rect key="frame" x="287" y="20" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="moon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="sun"/>
+                                <state key="highlighted" image="sun"/>
+                                <connections>
+                                    <action selector="dayNightBtnClicked" destination="F88-36-gJV" eventType="touchUpInside" id="pxw-81-rb6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="EmA-P5-nH2"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="dayNightButton" destination="N2g-Zn-P0C" id="V0v-QF-j3A"/>
                         <outlet property="stepper" destination="shl-HZ-eF5" id="tjS-eg-3Hp"/>
                         <outlet property="thermometerView" destination="MWQ-xF-ZQo" id="C2k-GG-RgQ"/>
                         <outlet property="timeLabel" destination="TdJ-sk-XxC" id="cdF-Uh-kXL"/>
@@ -83,7 +86,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kOk-SP-aDN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-50" y="426"/>
+            <point key="canvasLocation" x="-51" y="426"/>
         </scene>
         <!--History View Controller-->
         <scene sceneID="1yB-Jw-cdn">
@@ -135,6 +138,10 @@
             <point key="canvasLocation" x="507" y="426"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="moon" width="65" height="65"/>
+        <image name="sun" width="65" height="65"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

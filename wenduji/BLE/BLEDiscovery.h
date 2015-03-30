@@ -80,7 +80,7 @@
 /*								UI controls									*/
 /****************************************************************************/
 @property (nonatomic, assign) id<BLEDiscoveryDelegate>       discoveryDelegate;
-@property (nonatomic, assign) id<BLEAlarmProtocol>	peripheralDelegate;
+@property (nonatomic, assign) id<ThermometerProtocol>	peripheralDelegate;
 
 
 /****************************************************************************/
@@ -93,7 +93,6 @@
 - (void) connectPeripheral:(CBPeripheral*)peripheral;
 - (void) disconnectPeripheral:(CBPeripheral*)peripheral;
 
-- (void) readRSSI;
 /****************************************************************************/
 /*							Access to the devices							*/
 /****************************************************************************/

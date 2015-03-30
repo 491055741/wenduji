@@ -232,7 +232,7 @@
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
 	if (![foundPeripherals containsObject:peripheral]
-        && [[peripheral.identifier UUIDString] isEqualToString:kAntiLostPeripheralUUIDString]) {
+        && [[peripheral.identifier UUIDString] isEqualToString:kThermometerPeripheralUUID]) {
 		[foundPeripherals addObject:peripheral];
         [_centralManager connectPeripheral:peripheral options:nil];
 		[discoveryDelegate discoveryDidRefresh];
@@ -259,22 +259,26 @@
 
 - (void) centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
-	BLEService	*service	= nil;
-	
-	/* Create a service instance. */
-	service = [[BLEService alloc] initWithPeripheral:peripheral controller:peripheralDelegate];
-	[service start];
+    /* Create a service instance. */
+	BLEService *service1 = [[NSClassFromString(@"TemperatureService") alloc] initWithPeripheral:peripheral controller:peripheralDelegate];
+	[service1 start];
 
-	if (![connectedServices containsObject:service])
-		[connectedServices addObject:service];
+	if (![connectedServices containsObject:service1])
+		[connectedServices addObject:service1];
 
+//    BLEService *service2 = [[NSClassFromString(@"BatteryService") alloc] initWithPeripheral:peripheral controller:peripheralDelegate];
+//    [service2 start];
+
+//    if (![connectedServices containsObject:service2])
+//        [connectedServices addObject:service2];
+    
 	if ([foundPeripherals containsObject:peripheral])
 		[foundPeripherals removeObject:peripheral];
 
-    [peripheralDelegate alarmServiceDidChangeStatus:service];
-	[discoveryDelegate discoveryDidRefresh];
+    [peripheralDelegate ThermometerDidChangeStatus:service1];
+//    [peripheralDelegate ThermometerDidChangeStatus:service2];
+    [discoveryDelegate discoveryDidRefresh];
 }
-
 
 - (void) centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
@@ -289,7 +293,7 @@
 	for (service in connectedServices) {
 		if ([service peripheral] == peripheral) {
 			[connectedServices removeObject:service];
-            [peripheralDelegate alarmServiceDidChangeStatus:service];
+            [peripheralDelegate ThermometerDidChangeStatus:service];
 			break;
 		}
 	}
@@ -306,13 +310,6 @@
         [service reset];
     }
     [connectedServices removeAllObjects];
-}
-
-- (void)readRSSI
-{
-    for (BLEService *service in connectedServices) {
-        [service readRSSI];
-    }
 }
 
 - (void) centralManagerDidUpdateState:(CBCentralManager *)central
@@ -350,9 +347,9 @@
 //			[self loadSavedDevices];
 //			[centralManager retrieveConnectedPeripherals];
 //            [_centralManager retrieveConnectedPeripheralsWithServices:@[[CBUUID
-//                                                                          UUIDWithString:kAntiLostServiceUUIDString] ]];
+//                                                                          UUIDWithString:kTemperatureServiceUUID] ]];
             [self startScanning];
-
+//            [self startScanningForUUIDString:kThermometerPeripheralUUID];
 			[discoveryDelegate discoveryDidRefresh];
 			break;
 		}
@@ -361,7 +358,7 @@
 		{
 			[self clearDevices];
             [discoveryDelegate discoveryDidRefresh];
-            [peripheralDelegate alarmServiceDidReset];
+            [peripheralDelegate ThermometerDidReset];
             
 			_pendingInit = YES;
 			break;

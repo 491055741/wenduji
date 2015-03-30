@@ -33,6 +33,8 @@
 		E8B4B6941AADE0BB00A22CE9 /* ChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8B4B68F1AADE0BB00A22CE9 /* ChartTableViewCell.xib */; };
 		E8B4B6951AADE0BB00A22CE9 /* ChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B4B6911AADE0BB00A22CE9 /* ChartViewController.m */; };
 		E8B4B6981AADE63300A22CE9 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8B4B6971AADE63300A22CE9 /* Storyboard.storyboard */; };
+		E8E4E93F1AC84B780058E395 /* TemperatureService.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E4E93E1AC84B780058E395 /* TemperatureService.m */; };
+		E8E4E9421AC84B9B0058E395 /* BatteryService.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E4E9411AC84B9B0058E395 /* BatteryService.m */; };
 		E8E535781AA9A7A700C33759 /* CircleProgressBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E535751AA9A7A700C33759 /* CircleProgressBackground.m */; };
 		E8E535791AA9A7A700C33759 /* CircleProgressInfilling.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E535771AA9A7A700C33759 /* CircleProgressInfilling.m */; };
 		E8E864101AB33386005E47DC /* BLEDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E8640D1AB33386005E47DC /* BLEDiscovery.m */; };
@@ -119,6 +121,10 @@
 		E8B4B6901AADE0BB00A22CE9 /* ChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartViewController.h; sourceTree = "<group>"; };
 		E8B4B6911AADE0BB00A22CE9 /* ChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartViewController.m; sourceTree = "<group>"; };
 		E8B4B6971AADE63300A22CE9 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		E8E4E93D1AC84B780058E395 /* TemperatureService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemperatureService.h; sourceTree = "<group>"; };
+		E8E4E93E1AC84B780058E395 /* TemperatureService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemperatureService.m; sourceTree = "<group>"; };
+		E8E4E9401AC84B9B0058E395 /* BatteryService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatteryService.h; sourceTree = "<group>"; };
+		E8E4E9411AC84B9B0058E395 /* BatteryService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatteryService.m; sourceTree = "<group>"; };
 		E8E535741AA9A7A700C33759 /* CircleProgressBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressBackground.h; sourceTree = "<group>"; };
 		E8E535751AA9A7A700C33759 /* CircleProgressBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleProgressBackground.m; sourceTree = "<group>"; };
 		E8E535761AA9A7A700C33759 /* CircleProgressInfilling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressInfilling.h; sourceTree = "<group>"; };
@@ -325,6 +331,10 @@
 				E8E8640D1AB33386005E47DC /* BLEDiscovery.m */,
 				E8E8640E1AB33386005E47DC /* BLEService.h */,
 				E8E8640F1AB33386005E47DC /* BLEService.m */,
+				E8E4E93D1AC84B780058E395 /* TemperatureService.h */,
+				E8E4E93E1AC84B780058E395 /* TemperatureService.m */,
+				E8E4E9401AC84B9B0058E395 /* BatteryService.h */,
+				E8E4E9411AC84B9B0058E395 /* BatteryService.m */,
 			);
 			path = BLE;
 			sourceTree = "<group>";
@@ -419,6 +429,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
+					DA42B6F0197CAA33001F1E4B = {
+						DevelopmentTeam = S4NUSJ3KDJ;
+					};
 					DA42B70B197CAA33001F1E4B = {
 						TestTargetID = DA42B6F0197CAA33001F1E4B;
 					};
@@ -484,6 +497,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8B4B6931AADE0BB00A22CE9 /* ChartTableViewCell.m in Sources */,
+				E8E4E93F1AC84B780058E395 /* TemperatureService.m in Sources */,
 				E8B4B68C1AADDCCB00A22CE9 /* LineChart.m in Sources */,
 				E8EF93EB1ABEB0040040A9E2 /* KalDate.m in Sources */,
 				E8EF93ED1ABEB0040040A9E2 /* KalLogic.m in Sources */,
@@ -505,6 +519,7 @@
 				E8B4B6881AADDCCB00A22CE9 /* BarChart.m in Sources */,
 				E8B4B6871AADDCCB00A22CE9 /* Bar.m in Sources */,
 				E8B4B6951AADE0BB00A22CE9 /* ChartViewController.m in Sources */,
+				E8E4E9421AC84B9B0058E395 /* BatteryService.m in Sources */,
 				DA42B701197CAA33001F1E4B /* main.m in Sources */,
 				E8E864191AB406BC005E47DC /* Record.m in Sources */,
 				E8B4B68B1AADDCCB00A22CE9 /* Color.m in Sources */,
