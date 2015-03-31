@@ -124,8 +124,8 @@ NSString *kServiceEnteredForegroundNotification = @"kServiceEnteredForegroundNot
         } else if ([[characteristic UUID] isEqual:_batteryLevelUUID]) { // battery level
             NSLog(@"Discovered Battery Level Characteristic");
             _batteryLevelCharacteristic = characteristic;
-            [peripheral readValueForCharacteristic:characteristic];
             [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+            [peripheral readValueForCharacteristic:characteristic];
         }
     }
 }
@@ -158,8 +158,9 @@ NSString *kServiceEnteredForegroundNotification = @"kServiceEnteredForegroundNot
 {
     NSInteger result = 0;
     if (_batteryLevelCharacteristic) {
-        NSString *str = [[NSString alloc] initWithData:_batteryLevelCharacteristic.value encoding:NSUTF8StringEncoding];
-        result = [str intValue];
+//        NSString *str = [[NSString alloc] initWithData:_batteryLevelCharacteristic.value encoding:NSUTF8StringEncoding];
+//        result = [str intValue];
+        [_batteryLevelCharacteristic.value getBytes:&result];
     }
     return result;
 }
@@ -176,17 +177,17 @@ NSString *kServiceEnteredForegroundNotification = @"kServiceEnteredForegroundNot
 
 - (void) peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    /* Temperature change */
-    if ([[characteristic UUID] isEqual:_batteryLevelCharacteristic]) {
-                NSLog(@"%s Character[%@] nofify value:[%@]", __FUNCTION__, [characteristic UUID], [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding] );
-        [self.peripheralDelegate ThermometerDidChangeBatteryLevel:self.batteryLevel];
+    /* Battery level change */
+    if ([[characteristic UUID] isEqual:_batteryLevelUUID]) {
+        NSLog(@"%s Character[%@] nofify value:[%@]", __FUNCTION__, [characteristic UUID], [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding] );
+        [self.peripheralDelegate thermometerDidChangeBatteryLevel:self.batteryLevel];
         return;
     }
 
     /* Temperature change */
     if ([[characteristic UUID] isEqual:_currentTemperatureUUID]) {
         //        NSLog(@"%s Character[%@] nofify value:[%@]", __FUNCTION__, [characteristic UUID], [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding] );
-        [self.peripheralDelegate ThermometerDidChangeTemperature:self.temperature];
+        [self.peripheralDelegate thermometerDidChangeTemperature:self.temperature];
         return;
     }
 }
@@ -198,7 +199,7 @@ NSString *kServiceEnteredForegroundNotification = @"kServiceEnteredForegroundNot
 //    
 //    /* Upper or lower bounds changed */
 //    if ([characteristic.UUID isEqual:minimumTemperatureUUID] || [characteristic.UUID isEqual:maximumTemperatureUUID]) {
-//        [peripheralDelegate ThermometerDidChangeTemperatureBounds:self];
+//        [peripheralDelegate thermometerDidChangeTemperatureBounds:self];
 //    }
 }
 @end

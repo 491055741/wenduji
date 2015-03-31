@@ -25,10 +25,10 @@ extern NSString *kBatteryLevelCharacteristicUUID;
 
 @protocol ThermometerProtocol<NSObject>
 @optional
-- (void)ThermometerDidChangeTemperature:(CGFloat)temperature;
-- (void)ThermometerDidChangeBatteryLevel:(NSInteger)batteryLevel;
-- (void)ThermometerDidChangeStatus:(BLEService*)service;
-- (void)ThermometerDidReset;
+- (void)thermometerDidChangeTemperature:(CGFloat)temperature;
+- (void)thermometerDidChangeBatteryLevel:(NSInteger)batteryLevel;
+- (void)thermometerDidChangeStatus:(BLEService*)service;
+- (void)thermometerDidReset;
 
 @end
 

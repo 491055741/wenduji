@@ -19,10 +19,11 @@
 @interface ViewController () <BLEDiscoveryDelegate, ThermometerProtocol>
 @property (nonatomic, assign) BOOL isNightMode;
 @property (nonatomic, assign) BOOL isManualSetDayNight;
-@property (nonatomic, weak) IBOutlet UIStepper *stepper;
 @property (nonatomic, weak) IBOutlet ThermometerView *thermometerView;
 @property (nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property (nonatomic, weak) IBOutlet UIButton *dayNightButton;
+@property (nonatomic, weak) IBOutlet UIImageView *batteryImageView;
+@property (nonatomic, weak) IBOutlet UILabel *hintLable;
 @property (nonatomic, strong) NSTimer *timer;
 
 @end
@@ -34,13 +35,11 @@
 {
     [super viewDidLoad];
 
-    _stepper.hidden = YES;
-    _stepper.minimumValue = _thermometerView.minValue = 35.0f;
-    _stepper.maximumValue = _thermometerView.maxValue = 42.0f;
     _thermometerView.width = 15;
-    _stepper.value = _thermometerView.value = _stepper.minimumValue;
-    _stepper.stepValue = 0.1f;
-
+    _thermometerView.minValue =  _thermometerView.value = 35;
+    _thermometerView.LedNumberView.hidden = YES;
+    _hintLable.hidden = NO;
+    _thermometerView.maxValue = 42;
     self.view.backgroundColor = DAY_BG_COLOR;
     _timeLabel.textColor = DAY_TIME_COLOR;
     [self checkTime];
@@ -128,20 +127,20 @@
 #pragma mark LeAntiLostAlarmProtocol Delegate Methods
 
 /** Peripheral connected or disconnected */
-- (void) ThermometerDidChangeStatus:(BLEService*)service
+- (void)thermometerDidChangeStatus:(BLEService*)service
 {
     if ( [service peripheral].state == CBPeripheralStateConnected ) {
         NSLog(@"%s Device (%@) connected", __func__, service.peripheral.name);
-//        _statusLabel.text = [NSString stringWithFormat:@"%@ connected." ,service.peripheral.name ];
-//        [self changeConnectStateTo:YES];
+        _thermometerView.LedNumberView.hidden = NO;
+        _hintLable.hidden = YES;
     } else {
         NSLog(@"%s Device (%@) disconnected", __func__, service.peripheral.name);
-//        _statusLabel.text = @"Connecting...";
-//        [self changeConnectStateTo:NO];
+        _thermometerView.LedNumberView.hidden = YES;
+        _hintLable.hidden = NO;
     }
 }
 
-- (void)ThermometerDidChangeTemperature:(CGFloat)temperature
+- (void)thermometerDidChangeTemperature:(CGFloat)temperature
 {
     if (_thermometerView.value < 40 && temperature >= 40) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"高温警告" message:@"体温过高！建议您立刻联系医生或去医院检查！" preferredStyle:UIAlertControllerStyleAlert];
@@ -154,13 +153,14 @@
     _thermometerView.value = temperature;
 }
 
-- (void) ThermometerDidChangeBatteryLevel:(NSInteger)batteryLevel
+- (void) thermometerDidChangeBatteryLevel:(NSInteger)batteryLevel
 {
-    NSLog(@"%s battery level:%ld", __FUNCTION__, (long)batteryLevel);
+    NSLog(@"%s battery level:%ld image:%d", __FUNCTION__, (long)batteryLevel, (int)batteryLevel/20);
+    _batteryImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"battery%d.png", (int)(batteryLevel/20 + 1)]];
 }
 
 /** Central Manager reset */
-- (void)ThermometerDidReset
+- (void)thermometerDidReset
 {
     NSLog(@"%s", __func__);
     //    [connectedServices removeAllObjects];

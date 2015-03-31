@@ -30,18 +30,6 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="MWQ-xF-ZQo" customClass="ThermometerView">
-                                <rect key="frame" x="30" y="168" width="260" height="260"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" id="shl-HZ-eF5">
-                                <rect key="frame" x="16" y="519" width="94" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <action selector="changeValue:" destination="F88-36-gJV" eventType="valueChanged" id="Gwg-Fy-Q7Z"/>
-                                </connections>
-                            </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TdJ-sk-XxC">
                                 <rect key="frame" x="113" y="72" width="94" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -71,6 +59,24 @@
                                     <action selector="dayNightBtnClicked" destination="F88-36-gJV" eventType="touchUpInside" id="pxw-81-rb6"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="battery5" id="Zpk-ID-ZXn">
+                                <rect key="frame" x="30" y="528" width="40" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" id="MWQ-xF-ZQo" customClass="ThermometerView">
+                                <rect key="frame" x="30" y="168" width="260" height="260"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请开启体温计" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jd4-jH-lAe">
+                                        <rect key="frame" x="61" y="101" width="139" height="57"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -78,8 +84,9 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="batteryImageView" destination="Zpk-ID-ZXn" id="BYM-EX-JiJ"/>
                         <outlet property="dayNightButton" destination="N2g-Zn-P0C" id="V0v-QF-j3A"/>
-                        <outlet property="stepper" destination="shl-HZ-eF5" id="tjS-eg-3Hp"/>
+                        <outlet property="hintLable" destination="Jd4-jH-lAe" id="e34-Vn-5hp"/>
                         <outlet property="thermometerView" destination="MWQ-xF-ZQo" id="C2k-GG-RgQ"/>
                         <outlet property="timeLabel" destination="TdJ-sk-XxC" id="cdF-Uh-kXL"/>
                     </connections>
@@ -139,6 +146,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="battery5" width="145" height="74"/>
         <image name="moon" width="65" height="65"/>
         <image name="sun" width="65" height="65"/>
     </resources>

@@ -269,7 +269,7 @@
 	if ([foundPeripherals containsObject:peripheral])
 		[foundPeripherals removeObject:peripheral];
 
-    [peripheralDelegate ThermometerDidChangeStatus:service];
+    [peripheralDelegate thermometerDidChangeStatus:service];
     [discoveryDelegate discoveryDidRefresh];
 }
 
@@ -286,7 +286,7 @@
 	for (service in connectedServices) {
 		if ([service peripheral] == peripheral) {
 			[connectedServices removeObject:service];
-            [peripheralDelegate ThermometerDidChangeStatus:service];
+            [peripheralDelegate thermometerDidChangeStatus:service];
 			break;
 		}
 	}
@@ -351,7 +351,7 @@
 		{
 			[self clearDevices];
             [discoveryDelegate discoveryDidRefresh];
-            [peripheralDelegate ThermometerDidReset];
+            [peripheralDelegate thermometerDidReset];
             
 			_pendingInit = YES;
 			break;
