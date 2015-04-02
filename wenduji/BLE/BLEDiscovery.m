@@ -232,7 +232,8 @@
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
 	if (![foundPeripherals containsObject:peripheral]
-        && [[peripheral.identifier UUIDString] isEqualToString:kThermometerPeripheralUUID]) {
+//        && [[peripheral.identifier UUIDString] isEqualToString:kThermometerPeripheralUUID]
+        ) {
 		[foundPeripherals addObject:peripheral];
         [_centralManager connectPeripheral:peripheral options:nil];
 		[discoveryDelegate discoveryDidRefresh];
